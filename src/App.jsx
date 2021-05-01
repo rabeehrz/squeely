@@ -1,8 +1,9 @@
 import React from 'react';
+import './index.css';
 
 const App = () => {
   return (
-    <div>
+    <div className="">
       <h2>Squeely!</h2>
     </div>
   );
