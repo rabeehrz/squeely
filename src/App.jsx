@@ -1,12 +1,9 @@
 import React from 'react';
 import './index.css';
+import Layout from './parts/Layout';
 
 const App = () => {
-  return (
-    <div className="">
-      <h2>Squeely!</h2>
-    </div>
-  );
+  return <Layout />;
 };
 
 export default App;
