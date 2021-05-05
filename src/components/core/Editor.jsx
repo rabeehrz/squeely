@@ -10,6 +10,8 @@ import 'codemirror/keymap/sublime';
 
 import { Controlled as ControlledEditor } from 'react-codemirror2';
 
+const excludeKeys = [13, 27, 8, 37, 38, 39, 40];
+
 const Editor = ({ value, onChange }) => {
   return (
     <div>
@@ -18,8 +20,7 @@ const Editor = ({ value, onChange }) => {
         onKeyUp={(editor, event) => {
           if (
             !editor.state.completionActive &&
-            event.keyCode !== 13 &&
-            event.keyCode !== 27
+            !excludeKeys.includes(event.keyCode)
           ) {
             editor.showHint({ completeSingle: false });
           }

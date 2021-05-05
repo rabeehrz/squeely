@@ -14,6 +14,16 @@ export const executeQuery = (space) => (dispatch) => {
   // Execute query
 };
 
+export const removeQuery = (space, query) => (dispatch) => {
+  dispatch({
+    type: spaces.UPDATE_SPACE,
+    payload: {
+      ...space,
+      queries: space.queries.filter((_query) => _query.id !== query.id),
+    },
+  });
+};
+
 export const toggleBookmark = (space, query) => (dispatch) => {
   const newQueries = space.queries.map((_query) =>
     query.id === _query.id

@@ -13,6 +13,7 @@ import {
   updateSpace,
   executeQuery,
   toggleBookmark,
+  removeQuery,
 } from '../../state/ducks/spaces/actions';
 
 const Query = (props) => {
@@ -70,12 +71,18 @@ const Query = (props) => {
               <li
                 key={__query.id}
                 className="bg-white py-2 px-4 mb-2 border border-gray-200 rounded hover:border-2 hover:border-primary cursor-pointer">
-                <div>
+                <span
+                  onClick={() =>
+                    props.updateSpace({
+                      ...spaces.activeSpace,
+                      currentQuery: __query.text,
+                    })
+                  }>
                   <span className="text-xs font-bold text-secondary-250 leading-none">
                     by Bruce Wayne
                   </span>
                   <p>{__query.text}</p>
-                </div>
+                </span>
                 <div className="flex mt-1 items-center">
                   <>
                     {__query.bookmarked === true ? (
@@ -94,7 +101,12 @@ const Query = (props) => {
                       />
                     )}
                   </>
-                  <TrashCan16 className="h-5 w-5 text-red-500 fill-current" />
+                  <TrashCan16
+                    onClick={() =>
+                      props.removeQuery(spaces.activeSpace, __query)
+                    }
+                    className="h-5 w-5 text-red-500 fill-current"
+                  />
                 </div>
               </li>
             ))}
@@ -108,4 +120,5 @@ export default connect((state) => state, {
   updateSpace,
   executeQuery,
   toggleBookmark,
+  removeQuery,
 })(Query);
