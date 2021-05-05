@@ -5,7 +5,6 @@ import { addSpace, setActiveSpace } from '../../state/ducks/spaces/actions';
 
 const Sidebar = (props) => {
   const { spaces } = props;
-  console.log(spaces);
   return (
     <aside className="bg-white px-5 pb-5 shadow-base">
       <div className="mt-11 flex items-center font-bold text-primary">
