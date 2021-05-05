@@ -9,7 +9,7 @@ import Query from './pages/Query';
 const App = () => {
   return (
     <Layout>
-      <div className="bg-white h-full mt-4 shadow-base px-8 py-5 rounded-lg">
+      <div className="bg-white h-full mt-4 shadow-base px-8 py-5 rounded-lg flex flex-col">
         <ul className="flex space-x-5 text-secondary-250">
           <NavLink to="/" exact activeClassName="text-primary">
             <li className="cursor-pointer">

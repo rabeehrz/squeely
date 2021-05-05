@@ -40,7 +40,7 @@ const Sidebar = (props) => {
           ))}
 
           <li
-            className="text-sm py-2 px-3 flex items-center bg-white text-seconday rounded-lg cursor-pointer hover:bg-gray-200 font-medium"
+            className="text-sm py-2 px-3 flex items-center bg-white text-secondary rounded-lg cursor-pointer hover:bg-gray-100 font-medium"
             onClick={() => props.addSpace()}>
             <Add16 className="fill-current mr-2.5" />
             <span>Add Space</span>
