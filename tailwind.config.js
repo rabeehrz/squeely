@@ -16,6 +16,9 @@ module.exports = {
           DEFAULT: '#171717',
           250: 'rgba(23,23,23,0.25)',
         },
+        gray: {
+          fb: '#FBFBFB',
+        },
       },
       boxShadow: {
         base:

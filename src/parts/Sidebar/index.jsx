@@ -11,9 +11,9 @@ const Header = () => {
         </h1>
       </div>
       <div className="mt-12">
-        <h2 className="text-secondary tracking-tighter text-lg leading-none font-bold">
+        <h3 className="text-secondary tracking-tighter text-lg leading-none font-bold">
           Spaces
-        </h2>
+        </h3>
         <ul className="mt-5 flex flex-col space-y-2">
           <li className="text-sm py-2 px-3 flex items-center bg-primary text-white rounded-lg cursor-pointer hover:bg-primary-dark font-medium">
             <DocumentBlank16 className="fill-current mr-2.5" />
