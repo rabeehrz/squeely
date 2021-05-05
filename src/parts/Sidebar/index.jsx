@@ -26,7 +26,10 @@ const Sidebar = (props) => {
                   ? 'bg-primary text-white'
                   : 'bg-white hover:bg-gray-200 text-secondary'
               }`}
-              onClick={() => props.setActiveSpace(space.id)}>
+              onClick={() =>
+                spaces.activeSpace.id !== space.id &&
+                props.setActiveSpace(space.id)
+              }>
               <DocumentBlank16 className="fill-current mr-2.5" />
               <span
                 style={{ width: '85px' }}
