@@ -25,3 +25,35 @@ export const toggleBookmark = (space, query) => (dispatch) => {
     payload: { ...space, queries: newQueries },
   });
 };
+
+export const addData = (space, columns, rows) => (dispatch) => {
+  const cleanedColumns = columns.map((column) => ({
+    Header: column,
+    accessor: column,
+  }));
+  const cleanedRows = [];
+  rows.forEach((row) => {
+    const obj = {};
+    row.forEach((item, index) => {
+      obj[columns[index]] = item;
+    });
+    cleanedRows.push(obj);
+  });
+
+  dispatch({
+    type: spaces.UPDATE_SPACE,
+    payload: { ...space, data: { columns: cleanedColumns, rows: cleanedRows } },
+  });
+};
+
+export const addDataWithoutFilter = (space, columns, rows) => (dispatch) => {
+  const cleanedColumns = columns.map((column) => ({
+    Header: column,
+    accessor: column,
+  }));
+
+  dispatch({
+    type: spaces.UPDATE_SPACE,
+    payload: { ...space, data: { columns: cleanedColumns, rows } },
+  });
+};

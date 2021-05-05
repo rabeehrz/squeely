@@ -12,7 +12,6 @@ export default (state = initialState, { type, payload }) => {
       const newSpace = {
         id: nanoid(),
         name: 'Untitled',
-        data: {},
         currentQuery: '',
         queries: [],
       };

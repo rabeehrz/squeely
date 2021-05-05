@@ -18,7 +18,7 @@ import {
 const Query = (props) => {
   const { spaces } = props;
   const [query, setQuery] = useState(spaces.activeSpace.currentQuery);
-  const [tab, setTab] = useState('bookmarks');
+  const [tab, setTab] = useState('history');
 
   useEffect(() => {
     const timeout = setTimeout(() => {

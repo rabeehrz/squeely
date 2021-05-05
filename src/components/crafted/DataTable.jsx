@@ -1,22 +1,28 @@
 import React, { useMemo } from 'react';
 import { useTable } from 'react-table';
-import DATA from './MOCK_DATA';
+import { connect } from 'react-redux';
+// import DATA from './MOCK_DATA';
 
-const COLUMNS = [
-  { Header: 'Id', accessor: 'id' },
-  { Header: 'First Name', accessor: 'first_name' },
-  { Header: 'Last Name', accessor: 'last_name' },
-  { Header: 'Email', accessor: 'email' },
-  { Header: 'Gender', accessor: 'gender' },
-  { Header: 'IP Address', accessor: 'ip_address' },
-  { Header: 'Vehicle', accessor: 'vehicle' },
-  { Header: 'Country', accessor: 'country' },
-  { Header: 'Currency', accessor: 'currency' },
-];
+// const COLUMNS = [
+//   { Header: 'Id', accessor: 'id' },
+//   { Header: 'First Name', accessor: 'first_name' },
+//   { Header: 'Last Name', accessor: 'last_name' },
+//   { Header: 'Email', accessor: 'email' },
+//   { Header: 'Gender', accessor: 'gender' },
+//   { Header: 'IP Address', accessor: 'ip_address' },
+//   { Header: 'Vehicle', accessor: 'vehicle' },
+//   { Header: 'Country', accessor: 'country' },
+//   { Header: 'Currency', accessor: 'currency' },
+// ];
 
-const DataTable = () => {
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => DATA, []);
+const DataTable = (props) => {
+  const { spaces } = props;
+  const columns = useMemo(() => spaces.activeSpace.data.columns, [
+    spaces.activeSpace.data.columns,
+  ]);
+  const data = useMemo(() => spaces.activeSpace.data.rows, [
+    spaces.activeSpace.data.rows,
+  ]);
 
   const table = useTable({ columns, data });
 
@@ -79,4 +85,4 @@ const DataTable = () => {
   );
 };
 
-export default DataTable;
+export default connect((state) => state, {})(DataTable);
