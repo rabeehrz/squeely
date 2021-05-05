@@ -1,0 +1,4 @@
+export default {
+  ADD_SPACE: 'ADD_SPACE',
+  SWITCH_ACTIVE_SPACE: 'SWITCH_ACTIVE_SPACE',
+};
