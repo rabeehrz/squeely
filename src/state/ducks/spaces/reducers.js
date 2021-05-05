@@ -20,6 +20,16 @@ export default (state = initialState, { type, payload }) => {
         spaces: [...state.spaces, newSpace],
         activeSpace: newSpace,
       };
+
+    case spaces.DELETE_SPACE:
+      const newSpaces = state.spaces.filter(
+        (space) => space.id !== state.activeSpace.id,
+      );
+      return {
+        ...state,
+        spaces: newSpaces,
+        activeSpace: newSpaces[0] || {},
+      };
     case spaces.SWITCH_ACTIVE_SPACE:
       return {
         ...state,

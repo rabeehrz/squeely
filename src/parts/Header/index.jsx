@@ -1,23 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Share16 } from '@carbon/icons-react';
+import { Share16, TrashCan16 } from '@carbon/icons-react';
+import { deleteSpace } from '../../state/ducks/spaces/actions';
 
 const Header = (props) => {
   const { spaces } = props;
   return (
     <header className="flex items-center justify-between">
       <div>
-        <span className="font-bold text-sm leading-none text-secondary-250">
-          bruce / space-name / {spaces.activeSpace.id}
-        </span>
-        <div className="flex items-center mt-0.5">
-          <h2 className="font-semibold text-xl text-secondary leading-none">
-            {spaces.activeSpace.name}
-          </h2>
-          <div className="ml-2.5 text-white bg-secondary cursor-pointer rounded-full p-1">
-            <Share16 className="w-5 h-5" />
-          </div>
-        </div>
+        {spaces.spaces.length > 0 && (
+          <>
+            <span className="font-bold text-sm leading-none text-secondary-250">
+              bruce / space-name / {spaces.activeSpace.id}
+            </span>
+            <div className="flex items-center mt-0.5">
+              <h2 className="font-semibold text-xl text-secondary leading-none">
+                {spaces.activeSpace.name}
+              </h2>
+              <div className="ml-2.5 text-white bg-secondary cursor-pointer rounded-full p-1">
+                <Share16 className="w-5 h-5" />
+              </div>
+              <div className="ml-2.5 text-white bg-red-500 cursor-pointer rounded-full p-1">
+                <TrashCan16
+                  className="w-5 h-5"
+                  onClick={() => props.deleteSpace()}
+                />
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <div className="flex items-center self-end">
         <div className="leading-none font-bold flex flex-col items-center">
@@ -30,4 +41,4 @@ const Header = (props) => {
   );
 };
 
-export default connect((state) => state, {})(Header);
+export default connect((state) => state, { deleteSpace })(Header);

@@ -9,6 +9,9 @@ export const setActiveSpace = (id) => (dispatch) =>
 export const updateSpace = (space) => (dispatch) =>
   dispatch({ type: spaces.UPDATE_SPACE, payload: space });
 
+export const deleteSpace = () => (dispatch) =>
+  dispatch({ type: spaces.DELETE_SPACE });
+
 export const executeQuery = (space) => (dispatch) => {
   dispatch({ type: spaces.ADD_QUERY_TO_HISTORY, payload: space });
   // Execute query
