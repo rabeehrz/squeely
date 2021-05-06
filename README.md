@@ -14,7 +14,7 @@
 
 ## Note
 
-Through out this application, it is assumed that the user is authenticated and has authorization to perform all the application.
+Through out this application, it is assumed that the user is authenticated and has authorization to perform all the functions in the application.
 
 ## Installation
 
