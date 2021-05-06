@@ -59,7 +59,7 @@ const Query = (props) => {
     <div className="mt-4 flex justify-between space-x-5 h-full">
       <div className="flex-col space-y-2 flex-1 max-w-2xl ">
         <Editor value={query} onChange={setQuery} />
-        <div className="flex">
+        <div className="flex items-center">
           <button
             type="button"
             className="text-xs py-1.5 px-2.5 flex items-center bg-white text-secondary rounded hover:bg-gray-100 font-medium"
@@ -74,6 +74,20 @@ const Query = (props) => {
             <DataTableReference16 className="fill-current mr-1.5" />
             <span>Export as JSON</span>
           </button>
+          <div className="flex text-sm space-x-5">
+            <span className="text-secondary">
+              <span className="font-semibold">
+                {spaces.activeSpace.qData.rows.length}
+              </span>{' '}
+              rows
+            </span>
+            <span className="text-secondary">
+              <span className="font-semibold">
+                {spaces.activeSpace.qData.columns.length}
+              </span>{' '}
+              columns
+            </span>
+          </div>
           <button
             type="button"
             className="text-xs ml-auto py-1.5 px-2.5 flex items-center bg-primary text-white rounded hover:bg-primary-dark font-medium"
