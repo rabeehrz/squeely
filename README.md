@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# squeely
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+- [Note](#note)
+- [Installation](#installation)
+- [Features](#features)
+  - [Autocomplete](#autocomplete)
+  - [Supports Multiple Spaces](#supports-multiple-spaces)
+  - [Supports CSV and JSON Data Formats](#supports-csv-and-json-data-formats)
+  - [Bookmarks and History](#bookmarks-and-history)
+- [Performance Analysis](#performance-analysis)
+- [Future Scopes](#future-scopes)
 
-In the project directory, you can run:
+## Note
 
-### `yarn start`
+Through out this application, it is assumed that the user is authenticated and has authorization to perform all the application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+yarn
+yarn start
+```
 
-### `yarn test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Autocomplete
 
-### `yarn build`
+- Autocomplete for SQL Editor.
+- Sublime Key Bindings
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Supports Multiple Spaces
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Multiple Workspaces in a single app.
+- Clicking the share button will copy the link to space (concept only).
+- Double click the title to change the name.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Supports CSV and JSON Data Formats
 
-### `yarn eject`
+- Import/Export data in CSV and JSON formats.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Bookmarks and History
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Queries will be saved for each workspace.
+- Queries can be Bookmarked for later use.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Performace Analysis
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+By using the Google Chrome's Lighthouse audit, we are able to measure different metrics of the website. Before making any improvements, these are the results.
 
-## Learn More
+![before-lazy](https://github.com/rabeehrz/squeely/blob/master/docs/before-lazy.png?raw=true)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Improvements
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### GZip
 
-### Code Splitting
+The source code was run through webpack (provided by CRA) and the files were minified and compressed using GZip compression. The difference in bundle size is given below.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![gzip](https://github.com/rabeehrz/squeely/blob/master/docs/gzip.png?raw=true)
 
-### Analyzing the Bundle Size
+### Code Splitting and Lazy Loading
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The whole source code was split into different bundles. This helps to reduce the main bundle size and lazily load the splitted components as needed.
 
-### Making a Progressive Web App
+The bundle size after GZip and Code splitting is:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![code-split](https://github.com/rabeehrz/squeely/blob/master/docs/code-split.png?raw=true)
 
-### Advanced Configuration
+After implementation of lazy loading, around 200ms was saved in all metrics including FCP as shown.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![after-lazy](https://github.com/rabeehrz/squeely/blob/master/docs/after-lazy.png?raw=true)
 
-### Deployment
+### Future Scope
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+These are the features I wanted to implement, but couldn't due to time constraints.
 
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Implementing persistant react state.
+- Implementing sorting, grouping and aggregation using menus instead of raw SQL.
