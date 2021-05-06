@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import slugify from 'slugify';
 import { Share16, TrashCan16 } from '@carbon/icons-react';
 import { updateSpace, deleteSpace } from '../../state/ducks/spaces/actions';
 
@@ -30,7 +29,7 @@ const Header = (props) => {
         {spaces.spaces.length > 0 && (
           <>
             <span className="font-bold text-sm leading-none text-secondary-250">
-              bruce / {slugify(spaceName.toString())} / {spaces.activeSpace.id}
+              bruce / {spaces.activeSpace.id}
             </span>
             <div className="flex items-center mt-0.5">
               {!editing ? (
@@ -58,7 +57,15 @@ const Header = (props) => {
               )}
 
               <div className="ml-2.5 text-white bg-secondary cursor-pointer rounded-full p-1">
-                <Share16 className="w-5 h-5" />
+                <Share16
+                  className="w-5 h-5"
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      `https://squeely.vercel.app/spaces/${spaces.activeSpace.id}`,
+                    );
+                    alert('Copied to Clipboard');
+                  }}
+                />
               </div>
               <div className="ml-2.5 text-white bg-red-500 cursor-pointer rounded-full p-1">
                 <TrashCan16
