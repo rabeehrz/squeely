@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter, useHistory } from 'react-router-dom';
 import { Datastore16, DocumentBlank16, Add16 } from '@carbon/icons-react';
 import { addSpace, setActiveSpace } from '../../state/ducks/spaces/actions';
 
 const Sidebar = (props) => {
   const { spaces } = props;
+  const history = useHistory();
   return (
     <aside className="bg-white px-5 pb-5 shadow-base">
       <div className="mt-11 flex items-center font-bold text-primary">
@@ -41,7 +43,10 @@ const Sidebar = (props) => {
 
           <li
             className="text-sm py-2 px-3 flex items-center bg-white text-secondary rounded-lg cursor-pointer hover:bg-gray-100 font-medium"
-            onClick={() => props.addSpace()}>
+            onClick={() => {
+              props.addSpace();
+              history.push('/');
+            }}>
             <Add16 className="fill-current mr-2.5" />
             <span>Add Space</span>
           </li>
@@ -51,4 +56,6 @@ const Sidebar = (props) => {
   );
 };
 
-export default connect((state) => state, { addSpace, setActiveSpace })(Sidebar);
+export default withRouter(
+  connect((state) => state, { addSpace, setActiveSpace })(Sidebar),
+);
