@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './index.css';
@@ -6,11 +6,12 @@ import { DataTable16, Query16 } from '@carbon/icons-react';
 
 import TabNav from './components/crafted/Nav';
 
-// Import Pages
 import Layout from './parts/Layout';
-import Table from './pages/Table';
-import Query from './pages/Query';
-import Upload from './pages/Upload';
+
+// Import Pages
+const Table = React.lazy(() => import('./pages/Table'));
+const Query = React.lazy(() => import('./pages/Query'));
+const Upload = React.lazy(() => import('./pages/Upload'));
 
 // Navigation Links
 const links = [
@@ -34,13 +35,18 @@ const App = (props) => {
       {spaces.spaces.length > 0 ? (
         <div className="bg-white h-full w-full mt-4 shadow-base px-8 py-5 rounded-lg flex flex-col">
           <TabNav links={links} />
+
           {spaces.activeSpace.data ? (
-            <Switch>
-              <Route path="/" exact component={Table} />
-              <Route path="/query" exact component={Query} />
-            </Switch>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switch>
+                <Route path="/" exact component={Table} />
+                <Route path="/query" exact component={Query} />
+              </Switch>
+            </Suspense>
           ) : (
-            <Upload />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Upload />
+            </Suspense>
           )}
         </div>
       ) : (

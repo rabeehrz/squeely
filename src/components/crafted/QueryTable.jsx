@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTable } from 'react-table';
 import { connect } from 'react-redux';
+import { nanoid } from 'nanoid';
 
 import Table from '../core/Table';
 import HeadRow from '../core/HeadRow';
@@ -8,7 +9,7 @@ import BodyRow from '../core/BodyRow';
 import Th from '../core/Th';
 import Td from '../core/Td';
 
-const DataTable = (props) => {
+const QueryTable = (props) => {
   const { columns, data } = props;
   const table = useTable({ columns, data });
 
@@ -24,9 +25,11 @@ const DataTable = (props) => {
     <Table {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
-          <HeadRow {...headerGroup.getHeaderGroupProps()}>
+          <HeadRow key={nanoid()} {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <Th {...columns.getHeaderProps}>{column.render('Header')}</Th>
+              <Th key={nanoid()} {...columns.getHeaderProps}>
+                {column.render('Header')}
+              </Th>
             ))}
           </HeadRow>
         ))}
@@ -35,9 +38,11 @@ const DataTable = (props) => {
         {rows.map((row) => {
           prepareRow(row);
           return (
-            <BodyRow {...row.getRowProps()}>
+            <BodyRow key={nanoid()} {...row.getRowProps()}>
               {row.cells.map((cell) => (
-                <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
+                <Td key={nanoid()} {...cell.getCellProps()}>
+                  {cell.render('Cell')}
+                </Td>
               ))}
             </BodyRow>
           );
@@ -47,4 +52,4 @@ const DataTable = (props) => {
   );
 };
 
-export default connect((state) => state, {})(DataTable);
+export default connect((state) => state, {})(QueryTable);
