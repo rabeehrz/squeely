@@ -2,6 +2,12 @@ import React from 'react';
 import { useTable } from 'react-table';
 import { connect } from 'react-redux';
 
+import Table from '../core/Table';
+import HeadRow from '../core/HeadRow';
+import BodyRow from '../core/BodyRow';
+import Th from '../core/Th';
+import Td from '../core/Td';
+
 const DataTable = (props) => {
   const { columns, data } = props;
   const table = useTable({ columns, data });
@@ -15,43 +21,29 @@ const DataTable = (props) => {
   } = table;
 
   return (
-    <table
-      {...getTableProps()}
-      className="border-collapse border border-gray-300 max-h-full mt-1 relative overflow-scroll">
+    <Table {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
-          <tr
-            {...headerGroup.getHeaderGroupProps()}
-            className="font-semibold text-sm">
+          <HeadRow {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <th
-                {...columns.getHeaderProps}
-                className="p-2 border-b border-r border-gray-300 text-secondary sticky">
-                {column.render('Header')}
-              </th>
+              <Th {...columns.getHeaderProps}>{column.render('Header')}</Th>
             ))}
-          </tr>
+          </HeadRow>
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
           prepareRow(row);
           return (
-            <tr
-              {...row.getRowProps()}
-              className="text-sm text-gray-500 hover:text-secondary">
+            <BodyRow {...row.getRowProps()}>
               {row.cells.map((cell) => (
-                <td
-                  {...cell.getCellProps()}
-                  className="p-2 border-b border-r border-gray-300">
-                  {cell.render('Cell')}
-                </td>
+                <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
               ))}
-            </tr>
+            </BodyRow>
           );
         })}
       </tbody>
-    </table>
+    </Table>
   );
 };
 

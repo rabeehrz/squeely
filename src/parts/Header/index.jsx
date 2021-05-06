@@ -10,6 +10,7 @@ const Header = (props) => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
+      // Update the state only every 250ms
       props.updateSpace({
         ...spaces.activeSpace,
         name: spaceName === '' ? 'Untitled' : spaceName,

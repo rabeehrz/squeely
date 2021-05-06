@@ -1,19 +1,13 @@
 import React, { useMemo } from 'react';
 import { useTable } from 'react-table';
 import { connect } from 'react-redux';
-// import DATA from './MOCK_DATA';
+import { nanoid } from 'nanoid';
 
-// const COLUMNS = [
-//   { Header: 'Id', accessor: 'id' },
-//   { Header: 'First Name', accessor: 'first_name' },
-//   { Header: 'Last Name', accessor: 'last_name' },
-//   { Header: 'Email', accessor: 'email' },
-//   { Header: 'Gender', accessor: 'gender' },
-//   { Header: 'IP Address', accessor: 'ip_address' },
-//   { Header: 'Vehicle', accessor: 'vehicle' },
-//   { Header: 'Country', accessor: 'country' },
-//   { Header: 'Currency', accessor: 'currency' },
-// ];
+import Table from '../core/Table';
+import HeadRow from '../core/HeadRow';
+import BodyRow from '../core/BodyRow';
+import Th from '../core/Th';
+import Td from '../core/Td';
 
 const DataTable = (props) => {
   const { spaces } = props;
@@ -44,43 +38,33 @@ const DataTable = (props) => {
           <span className="font-semibold">{columns.length}</span> columns
         </span>
       </div>
-      <table
-        {...getTableProps()}
-        className="border-collapse border border-gray-300 max-h-full w-full mt-1 relative">
+      <Table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
-            <tr
-              {...headerGroup.getHeaderGroupProps()}
-              className="font-semibold text-sm">
+            <HeadRow key={nanoid()} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th
-                  {...columns.getHeaderProps}
-                  className="p-2 border-b border-r border-gray-300 text-secondary sticky">
+                <Th key={nanoid()} {...columns.getHeaderProps}>
                   {column.render('Header')}
-                </th>
+                </Th>
               ))}
-            </tr>
+            </HeadRow>
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <tr
-                {...row.getRowProps()}
-                className="text-sm text-gray-500 hover:text-secondary">
+              <BodyRow key={nanoid()} {...row.getRowProps()}>
                 {row.cells.map((cell) => (
-                  <td
-                    {...cell.getCellProps()}
-                    className="p-2 border-b border-r border-gray-300">
+                  <Td key={nanoid()} {...cell.getCellProps()}>
                     {cell.render('Cell')}
-                  </td>
+                  </Td>
                 ))}
-              </tr>
+              </BodyRow>
             );
           })}
         </tbody>
-      </table>
+      </Table>
     </>
   );
 };
