@@ -75,5 +75,5 @@ After implementation of lazy loading, around 200ms was saved in all metrics incl
 
 These are the features I wanted to implement, but couldn't due to time constraints.
 
-- Implementing persistant react state.
+- Implementing persistant application state.
 - Implementing sorting, grouping and aggregation using menus instead of raw SQL.
