@@ -3,9 +3,7 @@ import DataTable from '../../components/crafted/DataTable';
 
 const Table = () => {
   return (
-    <div
-      className="mt-4 overflow-x-scroll overflow-y-scroll"
-      style={{ height: '500px' }}>
+    <div className="mt-4 overflow-scroll w-full" style={{ height: '500px' }}>
       <DataTable />
     </div>
   );
