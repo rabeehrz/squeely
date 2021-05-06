@@ -46,7 +46,7 @@ const DataTable = (props) => {
       </div>
       <table
         {...getTableProps()}
-        className="border-collapse border border-gray-300 max-h-full max-w-full mt-1 relative">
+        className="border-collapse border border-gray-300 max-h-full w-full mt-1 relative">
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr

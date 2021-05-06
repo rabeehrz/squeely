@@ -5,7 +5,7 @@ const Table = () => {
   return (
     <div
       className="mt-4 overflow-x-scroll overflow-y-scroll"
-      style={{ width: '724px', height: '500px' }}>
+      style={{ height: '500px' }}>
       <DataTable />
     </div>
   );

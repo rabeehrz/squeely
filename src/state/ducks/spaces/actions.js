@@ -12,9 +12,28 @@ export const updateSpace = (space) => (dispatch) =>
 export const deleteSpace = () => (dispatch) =>
   dispatch({ type: spaces.DELETE_SPACE });
 
-export const executeQuery = (space) => (dispatch) => {
+export const executeQuery = (space) => (dispatch, getState) => {
   dispatch({ type: spaces.ADD_QUERY_TO_HISTORY, payload: space });
-  // Execute query
+  const newRows = [...space.qData.rows];
+  const newColumns = [...space.qData.columns];
+
+  newRows
+    .sort(() => 0.5 - Math.random())
+    .slice(0, Math.floor(Math.random() * space.qData.rows.length));
+
+  newColumns
+    .sort(() => 0.5 - Math.random())
+    .slice(0, Math.floor(Math.random() * space.qData.columns.length));
+
+  const newSpace = getState().spaces.activeSpace;
+
+  dispatch({
+    type: spaces.UPDATE_SPACE,
+    payload: {
+      ...newSpace,
+      qData: { columns: newColumns, rows: newRows },
+    },
+  });
 };
 
 export const removeQuery = (space, query) => (dispatch) => {
@@ -53,9 +72,11 @@ export const addData = (space, columns, rows) => (dispatch) => {
     cleanedRows.push(obj);
   });
 
+  const data = { columns: cleanedColumns, rows: cleanedRows };
+
   dispatch({
     type: spaces.UPDATE_SPACE,
-    payload: { ...space, data: { columns: cleanedColumns, rows: cleanedRows } },
+    payload: { ...space, data, qData: data },
   });
 };
 
@@ -65,8 +86,9 @@ export const addDataWithoutFilter = (space, columns, rows) => (dispatch) => {
     accessor: column,
   }));
 
+  const data = { columns: cleanedColumns, rows };
   dispatch({
     type: spaces.UPDATE_SPACE,
-    payload: { ...space, data: { columns: cleanedColumns, rows } },
+    payload: { ...space, data, qData: data },
   });
 };
